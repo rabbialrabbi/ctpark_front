@@ -3,6 +3,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import { useProductStore } from '@/stores/product.js'
 import { onMounted, ref } from 'vue'
 import Multiselect from 'vue-multiselect'
+import { useRouter } from 'vue-router'
 
 let productStore = useProductStore()
 
@@ -22,6 +23,7 @@ let selectedImage = ref('')
 let imagePreview = ref('')
 
 
+const router = useRouter()
 const handleFileUpload = (event) => {
   const file = event.target.files[0];
   console.log(file)
@@ -53,6 +55,13 @@ const uploadImage = async () => {
   })
 
   await productStore.createProduct(formData)
+  name.value = ''
+  categories.value = ''
+  selectedImage.value = ''
+  imagePreview.value = ''
+
+  await router.push('/products')
+
 }
 
 
@@ -71,7 +80,7 @@ const uploadImage = async () => {
                     <label for="username" class="block text-sm/6 font-medium text-gray-900">Product name</label>
                     <div class="mt-2">
                       <div class="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-                        <input type="text" v-model="name" id="username" class="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6" placeholder="janesmith" />
+                        <input type="text" v-model="name" id="username" class="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6" placeholder="Enter product name" />
                       </div>
                     </div>
                   </div>

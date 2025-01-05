@@ -34,7 +34,7 @@ onMounted(()=> productStore.getProductList())
                 </p>
               </div>
               <p class="text-sm font-medium text-gray-900">
-                <a href="javascript:void(0)" @click="editProduct(product.id)">Edit</a> <a href="">Delete</a>
+                <a href="javascript:void(0)">Edit</a> <a href="">Delete</a>
               </p>
             </div>
           </div>

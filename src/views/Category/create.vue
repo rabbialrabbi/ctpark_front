@@ -2,13 +2,17 @@
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import { useProductStore } from '@/stores/product.js'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
+let router = useRouter()
 let productStore = useProductStore()
 
 let name = ref('')
 
 const createCategory = async () => {
   await productStore.createCategory({ 'name': name.value} )
+  await router.push('/categories')
+
 }
 </script>
 
@@ -34,7 +38,7 @@ const createCategory = async () => {
                         v-model="name"
                         id="username"
                         class="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
-                        placeholder="janesmith"
+                        placeholder="Enter category name"
                       />
                     </div>
                   </div>
